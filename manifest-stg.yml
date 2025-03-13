@@ -1,6 +1,11 @@
 ---
 applications:
   - name: ccte-hazard-stg
+    routes:
+#      - route: ccte-api-p.app.cloud.gov
+      #- route: ccte-hazard-p.app.cloud.gov
+      - route: api-ccte-stg.epa.gov/hazard
+      #- route: ccte-api.app.cloud.gov/hazard
     memory: 2G
     instances: 1
     random-route: false
