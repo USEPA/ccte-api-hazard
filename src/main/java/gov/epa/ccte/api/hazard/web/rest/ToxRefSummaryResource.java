@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import gov.epa.ccte.api.hazard.domain.ToxRefData;
 import gov.epa.ccte.api.hazard.domain.ToxRefSummary;
-import gov.epa.ccte.api.hazard.repository.ToxRefDataRepository;
 import gov.epa.ccte.api.hazard.repository.ToxRefSummaryRepository;
 import lombok.extern.slf4j.Slf4j;
 

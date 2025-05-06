@@ -12,14 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import gov.epa.ccte.api.hazard.domain.ToxRefEffects;
+import gov.epa.ccte.api.hazard.web.rest.requests.ToxRefPage;
 
 import java.util.List;
 
 /**
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxRefEffects}s.
  */
-@Tag(name = "Tox Ref Effects Resource",
-        description = "API endpoints for collecting ToxRefDB effects information.")
+@Tag(name = "ToxRefDb Effects Resource",
+        description = "API endpoints for collecting ToxRefDB effects data.")
 @SecurityRequirement(name = "api_key")
 public interface ToxRefEffectsApi {
     /**
@@ -64,7 +65,7 @@ public interface ToxRefEffectsApi {
     })
     @GetMapping(value = "/hazard/toxref/effects/search/by-study-type/{studyType}")
     @ResponseBody
-    List<ToxRefEffects> toxRefEffectsByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType);
-
+    ToxRefPage toxRefEffectsByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType,
+										@RequestParam(required = false, value = "pageNumber", defaultValue = "1") Integer pageNumber);
 
 }

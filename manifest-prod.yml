@@ -8,7 +8,7 @@ applications:
     memory: 2G
     instances: 1
     random-route: false
-    path: target/hazard-1.0.0.jar
+    path: target/hazard-2.0.0.jar
     buildpacks:
     - https://github.com/cloudfoundry/java-buildpack
     env:

@@ -15,8 +15,8 @@ RUN mvn -Denvironment=${APP_SERVER_ENVIRONMENT} -f pom.xml clean package -DskipT
 ##################
 FROM ghcr.io/usepa/jdk-17:latest
 
-COPY --from=build /build/target/hazard-1.0.0.jar /usr/local/lib/hazard-1.0.0.jar
+COPY --from=build /build/target/hazard-2.0.0.jar /usr/local/lib/hazard-2.0.0.jar
 
 RUN java --version
 
-CMD ["java", "-jar", "/usr/local/lib/hazard-1.0.0.jar"]
+CMD ["java", "-jar", "/usr/local/lib/hazard-2.0.0.jar"]

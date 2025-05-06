@@ -2,7 +2,12 @@ package gov.epa.ccte.api.hazard.web.rest;
 
 import gov.epa.ccte.api.hazard.domain.ToxRefObs;
 import gov.epa.ccte.api.hazard.repository.ToxRefObsRepository;
+import gov.epa.ccte.api.hazard.service.ToxRefService;
+import gov.epa.ccte.api.hazard.web.rest.requests.ToxRefPage;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,10 +19,13 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 public class ToxRefObsResource implements ToxRefObsApi {
+	
     private final ToxRefObsRepository repository;
+    private final ToxRefService service;
 
-    public ToxRefObsResource(ToxRefObsRepository repository) {
+    public ToxRefObsResource(ToxRefObsRepository repository, ToxRefService service) {
         this.repository = repository;
+        this.service = service;
     }
 
     @Override
@@ -40,14 +48,11 @@ public class ToxRefObsResource implements ToxRefObsApi {
         return data;
     }
 
-    @Override
-    public @ResponseBody
-    List<ToxRefObs> toxRefObsByStudyType( String studyType) {
+	@Override
+	public ToxRefPage toxRefObsByStudyType(String studyType, Integer pageNumber){
         log.debug("all Tox Ref Observations by Study Type = {}", studyType);
-
-        List<ToxRefObs> data = repository.findAllByStudyType(studyType, ToxRefObs.class);
-        log.debug("data size = {}", data.size());
-
-        return data;
-    }
+        Integer pageSize = 10000;
+        Pageable pageable = PageRequest.of(pageNumber-1, pageSize);
+        return service.getAllToxRefObsByStudyType(studyType, pageSize, pageNumber, pageable);
+	}
 }

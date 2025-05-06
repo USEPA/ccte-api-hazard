@@ -23,7 +23,7 @@ import java.util.List;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxValDb}s.
  */
 @Tag(name = "ToxValDb Resource",
-        description = "API endpoints for collecting hazard data for specified chemical identifier (DTXSID).")
+        description = "API endpoints for collecting ToxValDb data for specified chemical identifier (DTXSID).")
 @SecurityRequirement(name = "api_key")
 public interface ToxValDbApi {
     @SuppressWarnings("rawtypes")

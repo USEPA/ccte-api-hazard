@@ -23,7 +23,7 @@ import java.util.List;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.CancerSummary}s.
  */
 
-@Tag(name = "Cancer Summary Resource",
+@Tag(name = "ToxValDb Cancer Summary Resource",
         description = "API endpoints for collecting cancer summary data.")
 @SecurityRequirement(name = "api_key")
 @RequestMapping( value = "hazard/cancer-summary", produces = MediaType.APPLICATION_JSON_VALUE)

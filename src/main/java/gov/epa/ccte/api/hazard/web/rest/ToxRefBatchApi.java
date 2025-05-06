@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 /**
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxRefBatch}s.
  */
-@Tag(name = "ToxRef Batch Resource",
+@Tag(name = "ToxRefDB Batch Resource",
         description = "API endpoints for collecting ToxRef data by batch of dtxsids.")
 @SecurityRequirement(name = "api_key")
 public interface ToxRefBatchApi {

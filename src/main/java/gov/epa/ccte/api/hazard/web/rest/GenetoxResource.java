@@ -33,7 +33,7 @@ public class GenetoxResource implements GenetoxApi {
     @Override
     public @ResponseBody
     List<GenetoxSummary> genetoxSummaryByDtxsid(String dtxsid) {
-        log.debug("all cancer summary for dtxsid = {}", dtxsid);
+        log.debug("all Genetox Summaries for dtxsid = {}", dtxsid);
 
         List<GenetoxSummary> data = summaryRepository.findByDtxsid(dtxsid, GenetoxSummary.class);
 
@@ -58,13 +58,26 @@ public class GenetoxResource implements GenetoxApi {
 // *********************** Detail - start *************************************
 
     @Override
-    public @ResponseBody
-    List<GenetoxDetail> genetoxDetailsByDtxsid(String dtxsid) {
-        log.debug("all cancer summary for dtxsid = {}", dtxsid);
-
-        List<GenetoxDetail> data = detailRepository.findByDtxsidOrderBySourceAsc(dtxsid, GenetoxDetail.class);
-
-        return data;
+    public List<?> getGenetoxDetailsByDtxsid(String dtxsid, String projection) {
+        log.debug("all Genetox Details for dtxsid = {}", dtxsid);
+        
+        if (projection == null || projection.isEmpty()) {
+            List<GenetoxDetail> result = detailRepository.findByDtxsidOrderBySourceAsc(dtxsid, GenetoxDetail.class);
+            return result != null ? List.of(result) : List.of(); 
+        }
+        
+        Object result = switch (projection) {
+        	case "ccd-genetox-details" -> detailRepository.findByDtxsidWithConcatenatedColumn(dtxsid);
+        	default -> detailRepository.findByDtxsidOrderBySourceAsc(dtxsid, GenetoxDetail.class);
+        };
+        
+        if (result instanceof List<?>) {
+            return (List<?>) result;
+        } else if (result != null) {
+            return List.of(result); 
+        } else {
+            return List.of(); 
+        }
     }
 
 

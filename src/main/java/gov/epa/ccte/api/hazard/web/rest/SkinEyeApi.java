@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.SkinEye}s.
  */
-@Tag(name = "Skin Eye Resource",
+@Tag(name = "ToxValDb Skin Eye Resource",
         description = "API endpoints for collecting skin eye data.")
 @SecurityRequirement(name = "api_key")
 public interface SkinEyeApi {

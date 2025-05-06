@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import gov.epa.ccte.api.hazard.domain.GenetoxDetail;
 import gov.epa.ccte.api.hazard.domain.GenetoxSummary;
+import gov.epa.ccte.api.hazard.projection.CcdGenetoxDetail;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ import java.util.List;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.GenetoxDetail}s. and
  */
 
-@Tag(name = "Genetox Resource",
+@Tag(name = "ToxValDb Genetox Resource",
         description = "API endpoints for collecting Genetox data.")
 @SecurityRequirement(name = "api_key")
 @RequestMapping( value = "hazard/genetox", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,14 +70,22 @@ public interface GenetoxApi {
      * @param dtxsid the matching dtxsid of the genetox detail data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of genetox detail}.
      */
-    @Operation(summary = "Get detail data by dtxsid")
+    @Operation(summary = "Get detail data by dtxsid with ccd projection",
+    				description = "return genetox details for requested dtxsid"+
+                            "there is an available projection for ccd  Genetoxicity Details page:" +
+   				         "ccd-genetox-details" +
+                            "If no projection is specified, the default GenetoxDetails data will be returned")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {GenetoxDetail.class})))
+                    schema = @Schema(oneOf = {GenetoxDetail.class, CcdGenetoxDetail.class})))
     })
     @GetMapping(value = "/details/search/by-dtxsid/{dtxsid}")
     @ResponseBody
-    List<GenetoxDetail> genetoxDetailsByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid);
+    List<?> getGenetoxDetailsByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") 
+    									@PathVariable("dtxsid") String dtxsid,
+    									@Parameter(description = "Specifies if projection is used. Option: ccd-genetox-details, " +
+    											"If omitted, the default GenetoxDetail data is returned.")
+    									@RequestParam(value = "projection", required = false) String projection);
 
     /**
      * {@code POST  hazard/genetox-details/search/by-dtxsid/{dtxsid} : get list of genetox detail data for batch "dtxsid".
