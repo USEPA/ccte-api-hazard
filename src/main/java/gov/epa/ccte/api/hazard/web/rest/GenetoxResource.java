@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.domain.GenetoxDetail;
 import gov.epa.ccte.api.hazard.domain.GenetoxSummary;
 import gov.epa.ccte.api.hazard.projection.CcdGenetoxDetail;
 import gov.epa.ccte.api.hazard.repository.GenetoxDetailRepository;
@@ -80,7 +79,6 @@ public class GenetoxResource implements GenetoxApi {
             return List.of(); 
         }
     }
-
 
     @Override
     public @ResponseBody
