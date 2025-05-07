@@ -21,10 +21,6 @@ public class GenetoxDetail {
     @NotNull
     @Column(name = "id", nullable = false)
     private Integer id;
-
-    @Size(max = 45)
-    @Column(name = "aggregate_study_type")
-    private String aggregateStudyType;
     
     @Size(max = 45)
     @Column(name = "assay_category")
@@ -35,35 +31,27 @@ public class GenetoxDetail {
     @Column(name = "assay_code")
     private String assayCode;
     
-    @Column(name = "assay_outcome")
-    private Integer assayOutcome;
-    
     @Size(max = 45)
     @Column(name = "assay_potency")
-    private String assayPotency;
+    private Integer assayPotency;
     
     @Size(max = 45)
     @Column(name = "assay_result")
     @Schema(description = "Result in assay (positive, negative, or other)")
     private String assayResult;
-
-    @Size(max = 45)
-    @Column(name = "assay_result_std")
-    private String assayResultStd;
     
     @Size(max = 255)
     @Column(name = "assay_type")
     @Schema(description = "Type of genotoxicity assay")
     private String assayType;
     
-    @Size(max = 45)
-    @Column(name = "assay_type_simple_aggregate")
-    @Schema(description = "Type of genotoxicity assay")
-    private String assayTypeSimpleAgg;
-    
     @Size(max = 255)
     @Column(name = "assay_type_standard")
     private String assayTypeStandard;
+    
+    @Size(max = 255)
+    @Column(name = "chemical_id")
+    private String chemicalId;
     
     @Size(max = 65)
     @Column(name = "clowder_doc_id")
@@ -78,11 +66,11 @@ public class GenetoxDetail {
     
     @Size(max = 45)
     @Column(name = "data_quality")
-    private String dataQuality;
+    private Integer dataQuality;
     
     @Size(max = 45)
     @Column(name = "document_number")
-    private String documentNumber;
+    private Integer documentNumber;
     
     @Size(max = 45)
     @Column(name = "document_source")
@@ -99,18 +87,14 @@ public class GenetoxDetail {
     
     @Size(max = 45)
     @Column(name = "duration")
-    private String duration;
+    private Integer duration;
     
     @Size(max = 255)
-    @Column(name = "genetox_details_hash")
-    private String genetoxDetailsHash;
+    @Column(name = "genetox_call")
+    private String genetoxCall;
     
     @Column(name = "genetox_details_id")
     private Integer genetoxDetailsId;
-    
-    @Size(max = 255)
-    @Column(name = "genetox_details_uuid")
-    private String genetoxDetailsUuid;
     
     @Size(max = 255)
     @Column(name = "genetox_note")
@@ -119,11 +103,26 @@ public class GenetoxDetail {
     @Size(max = 255)
     @Column(name = "genetox_results")
     private String genetoxResults;
-
+    
+    @Column(name = "genetox_summary_id")
+    private Integer genetoxSummaryId;
+    
+    @Column(name = "glp")
+    private Integer glp;
+    
+    @Column(name = "guideline")
+    private String guideline;
+    
+    @Column(name = "index")
+    private String index;
+    
     @Size(max = 45)
     @Column(name = "metabolic_activation", length = 45)
     @Schema(description = "Indicator if assay included metabolic activation")
-    private String metabolicActivation;
+    private Integer metabolicActivation;
+    
+    @Column(name = "micronucleus")
+    private String micronucleus;
     
     @Size(max = 255)
     @Column(name = "panel_report")
@@ -141,12 +140,18 @@ public class GenetoxDetail {
     @Column(name = "reference_url")
     private String referenceUrl;
     
+    @Column(name = "reports_neg")
+    private String reportsNeg;
+    
+    @Column(name = "reports_other")
+    private String reportsOther;
+    
+    @Column(name = "reports_pos")
+    private String reportsPos;
+    
     @Size(max = 45)
     @Column(name = "sex")
     private String sex;
-    
-    @Column(name = "smiles_2d_qsar")
-    private String smiles2dQsar;
     
     @Size(max = 45)
     @Column(name = "source")
@@ -157,10 +162,6 @@ public class GenetoxDetail {
     @Column(name = "species", length = 45)
     @Schema(description = "Species of the animal test subject used in a study")
     private String species;
-    
-    @Size(max = 45)
-    @Column(name = "species_strain", length = 45)
-    private String speciesStrain;
 
     @Size(max = 255)
     @Column(name = "strain")
@@ -171,6 +172,10 @@ public class GenetoxDetail {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "useme")
+    @Schema(description = "Year in which the study was reported as finished")
+    private Long useme;
+    
     @Column(name = "year")
     @Schema(description = "Year in which the study was reported as finished")
     private Integer year;

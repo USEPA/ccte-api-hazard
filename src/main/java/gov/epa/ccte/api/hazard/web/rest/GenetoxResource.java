@@ -63,7 +63,7 @@ public class GenetoxResource implements GenetoxApi {
         
         if (projection == null || projection.isEmpty()) {
             List<GenetoxDetail> result = detailRepository.findByDtxsidOrderBySourceAsc(dtxsid, GenetoxDetail.class);
-            return result != null ? List.of(result) : List.of(); 
+            return result; 
         }
         
         Object result = switch (projection) {
