@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +21,12 @@ import java.time.LocalDate;
 @Immutable
 @Table(name = "mv_data", schema = "toxref")
 public class ToxRefData {
+
     @Id
+    @NotNull
+    @Column(name = "id", nullable = false)
+    private Integer id;
+
     @Column(name = "study_id")
     @Schema(description = "A unique numeric identifier for each study in the database.")
     private Integer studyId;

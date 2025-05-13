@@ -1,7 +1,7 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.domain.GenetoxDetail;
 import gov.epa.ccte.api.hazard.domain.GenetoxSummary;
+import gov.epa.ccte.api.hazard.projection.CcdGenetoxDetail;
 import gov.epa.ccte.api.hazard.repository.GenetoxDetailRepository;
 import gov.epa.ccte.api.hazard.repository.GenetoxSummaryRepository;
 import gov.epa.ccte.api.hazard.web.rest.error.HigherNumberOfDtxsidException;
@@ -62,13 +62,13 @@ public class GenetoxResource implements GenetoxApi {
         log.debug("all Genetox Details for dtxsid = {}", dtxsid);
         
         if (projection == null || projection.isEmpty()) {
-            List<GenetoxDetail> result = detailRepository.findByDtxsidOrderBySourceAsc(dtxsid, GenetoxDetail.class);
-            return result != null ? List.of(result) : List.of(); 
+            List<CcdGenetoxDetail> result = detailRepository.findByDtxsidOrderBySourceAsc(dtxsid, CcdGenetoxDetail.class);
+            return result; 
         }
         
         Object result = switch (projection) {
         	case "ccd-genetox-details" -> detailRepository.findByDtxsidWithConcatenatedColumn(dtxsid);
-        	default -> detailRepository.findByDtxsidOrderBySourceAsc(dtxsid, GenetoxDetail.class);
+        	default -> detailRepository.findByDtxsidOrderBySourceAsc(dtxsid, CcdGenetoxDetail.class);
         };
         
         if (result instanceof List<?>) {
@@ -83,13 +83,13 @@ public class GenetoxResource implements GenetoxApi {
 
     @Override
     public @ResponseBody
-    List<GenetoxDetail> batchSearch(String[] dtxsids) {
+    List<CcdGenetoxDetail> batchSearch(String[] dtxsids) {
         log.debug("all cancer summary for dtxsid size= {}", dtxsids.length);
 
         if(dtxsids.length > batchSize)
             throw new HigherNumberOfDtxsidException(dtxsids.length, batchSize);
 
-        List<GenetoxDetail> data = detailRepository.findByDtxsidInOrderByDtxsidAsc(dtxsids, GenetoxDetail.class);
+        List<CcdGenetoxDetail> data = detailRepository.findByDtxsidInOrderByDtxsidAsc(dtxsids, CcdGenetoxDetail.class);
 
         return data;
     }

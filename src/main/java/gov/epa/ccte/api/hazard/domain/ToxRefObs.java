@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,10 @@ import java.time.LocalDate;
 @Table(name = "mv_obs", schema = "toxref")
 public class ToxRefObs {
     @Id
+    @NotNull
+    @Column(name = "id", nullable = false)
+    private Integer id;
+
     @Column(name = "study_id")
     @Schema(description = "Autoincremented unique numeric identifier for each study in ToxRefDB")
     private Integer studyId;
