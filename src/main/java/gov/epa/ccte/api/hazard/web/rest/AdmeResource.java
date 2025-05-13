@@ -25,6 +25,7 @@ public class AdmeResource implements AdmeApi{
 
         if (projection == null || projection.isEmpty()) {
             List<Adme> result = repository.findByDtxsid(dtxsid, Adme.class);
+
             return result; 
         }
 
