@@ -19,8 +19,14 @@ public class Hawc {
 
 	@Id
    	@NotNull
-	@Column(name = "assessment_id")
-	private Integer assessmentId;
+	@Column(name = "id")
+	private Integer id;
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "year")
+	private Integer year;
 	
 	@Column(name = "dtxsid")
 	private String dtxsid;
@@ -28,6 +34,6 @@ public class Hawc {
 	@Column(name = "ccd_url")
 	private String ccdUrl;
 	
-	@Column(name = "hawc_link")
-	private String hawcLink;
+	@Column(name = "hawc_url")
+	private String hawcUrl;
 }
