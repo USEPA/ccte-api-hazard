@@ -103,7 +103,7 @@ public interface GenetoxApi {
     })
     @PostMapping(value = "/details/search/by-dtxsid/")
     @ResponseBody
-    List<GenetoxDetail> batchSearch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<CcdGenetoxDetail> batchSearch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                        @RequestBody String[] dtxsids);
