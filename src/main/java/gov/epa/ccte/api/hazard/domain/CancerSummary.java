@@ -1,6 +1,9 @@
 package gov.epa.ccte.api.hazard.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
@@ -13,6 +16,9 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Schema(description = "A carcinogen is a substance that may cause cancer and pose a health hazard. Carcinogens are subject to specific controls and regulations. National and international health agencies evaluate new and existing chemicals to determine if they are likely to be carcinogens through a process called cancer hazard identification. This process combines human and animal data with supporting evidence to characterize the weight-of-evidence (WOE) regarding the agent's potential as a human carcinogen. The general categories recognized by the guidelines are carcinogenic to humans, likely to be carcinogenic to humans, and suggestive evidence of carcinogenic potential. This endpoint provides summary-level cancer data associated to a chemical.")
 @Table(name = "mv_cancer_summary", schema = "toxval")
 public class CancerSummary {

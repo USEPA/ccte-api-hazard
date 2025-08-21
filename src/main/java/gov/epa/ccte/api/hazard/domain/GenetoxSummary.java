@@ -7,11 +7,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Schema(description = "Description: Genotoxicity testing, also known as short-term assays, is used to evaluate the potential adverse effects of chemicals on human health. These tests can help identify carcinogens, as about 80% of known human carcinogens are genotoxic. The results of genotoxicity tests are important because of the irreversible nature and severity of the health effects that may result from genotoxic events. There are many different techniques that can be used for genotoxicity testing, notably including Ames test (comparative genetic analysis using multiple bacterial strains of Salmonella typhimurium), Comet assay (measurement DNA strand breaks), micronucleus test (cytogenetic assay that uses fluorescence in situ hybridization and chromosome painting) and chromosomal aberration test (cytogenetic assay that examines in vivo tissues to reflect how chemicals are absorbed, excreted, distributed, and metabolized). This endpoint provides summary-level genotoxicity data associated to a chemical.")
 @Entity
 @Table(name = "mv_genetox_summary", schema = "toxval")
