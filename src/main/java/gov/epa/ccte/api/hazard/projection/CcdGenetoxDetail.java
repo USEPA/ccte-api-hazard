@@ -11,5 +11,15 @@ public interface CcdGenetoxDetail {
 	String getStrain();
 	String getAssayResult();
 	Integer getYear();
+	
+	Void setDtxsid(String dtxsid);
+	Void setSource(String source);
+	Void setAssayCategory(String assayCategory);
+	Void setAssayType(String assayType);
+	Void setMetabolicActivation(String metabolicActivation);
+	Void setSpecies(String species);
+	Void setStrain(String strain);
+	Void setAssayResult(String assayResult);
+	Void setYear(Integer year);
 
 }

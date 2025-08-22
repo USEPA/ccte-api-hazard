@@ -1,7 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
 import gov.epa.ccte.api.hazard.domain.ToxValDb;
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -26,10 +25,6 @@ import java.util.List;
         description = "API endpoints for collecting ToxValDb data for specified chemical identifier (DTXSID).")
 @SecurityRequirement(name = "api_key")
 public interface ToxValDbApi {
-    @SuppressWarnings("rawtypes")
-    @Hidden
-    @GetMapping("/hazard/health")
-    ResponseEntity health();
 
     /**
      * {@code GET  hazard/search/by-dtxsid/{dtxsid} : get list of hazard data for the "dtxsid".
