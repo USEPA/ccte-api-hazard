@@ -28,7 +28,7 @@ public class ToxValDbResource implements ToxValDbApi {
 
     @Override
     public @ResponseBody
-    List<ToxValDb> hazardByDtxsid(String dtxsid) {
+    List<ToxValDb> getToxValDbDataByDtxsid(String dtxsid) {
         log.debug("all ToxValDb for dtxsid = {}", dtxsid);
 
         List<ToxValDb> data = repository.findAllByDtxsid(dtxsid,  ToxValDb.class);
@@ -39,7 +39,7 @@ public class ToxValDbResource implements ToxValDbApi {
 
     @Override
     public @ResponseBody
-    List<ToxValDb> hazardBatch(String[] dtxsids) {
+    List<ToxValDb> toxValDbDataByBatchDtxsid(String[] dtxsids) {
 
         log.debug("all ToxValDb for dtxsid size = {}", dtxsids.length);
 
