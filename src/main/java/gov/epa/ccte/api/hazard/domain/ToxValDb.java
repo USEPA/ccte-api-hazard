@@ -7,12 +7,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "mv_toxvaldb", schema = "toxval")
 @Schema(description = "The Toxicity Values Database (ToxValDB) is a compilation of toxicity information from world-wide sites, databases, and sources, which can save the user time by providing information in one location. The data are largely limited to summary values from individual studies or chemical-level assessments, and is focused on quantitative values such as LOAELs, NOAELs, BMDs, LD50s and RfDs. The user must apply judgment in use of the information and should consult the original scientific paper or data source, if possible, to ensure an understanding of the context of the data. The ToxValDB SQL download is available at https://www.epa.gov/comptox-tools/downloadable-computational-toxicology-data#AT .")
 public class ToxValDb {

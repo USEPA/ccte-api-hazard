@@ -1,6 +1,9 @@
 package gov.epa.ccte.api.hazard.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
@@ -13,6 +16,9 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Schema(description = "Skin and eye irritation tests are used to assess the safety of products and chemicals that may come into contact with the skin or eyes. These tests are important for labeling and registering chemicals and agrochemicals, and for developing drugs. Types of skin and eye irritation tests include Draize test, EpiOcular Eye Irritation Test (EIT), Red blood cells test, or Patch test")
 @Table(name = "mv_skin_eye", schema = "toxval")
 public class SkinEye {
