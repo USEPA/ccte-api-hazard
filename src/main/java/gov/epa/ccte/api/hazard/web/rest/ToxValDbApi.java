@@ -1,7 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
 import gov.epa.ccte.api.hazard.domain.ToxValDb;
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -26,10 +25,6 @@ import java.util.List;
         description = "API endpoints for collecting ToxValDb data for specified chemical identifier (DTXSID).")
 @SecurityRequirement(name = "api_key")
 public interface ToxValDbApi {
-    @SuppressWarnings("rawtypes")
-    @Hidden
-    @GetMapping("/hazard/health")
-    ResponseEntity health();
 
     /**
      * {@code GET  hazard/search/by-dtxsid/{dtxsid} : get list of hazard data for the "dtxsid".
@@ -43,7 +38,7 @@ public interface ToxValDbApi {
     })
     @GetMapping("hazard/toxval/search/by-dtxsid/{dtxsid}")
     @ResponseBody
-    List<ToxValDb> hazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
+    List<ToxValDb> getToxValDbDataByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
                                    @PathVariable("dtxsid") String dtxsid);
 
     /**
@@ -62,7 +57,7 @@ public interface ToxValDbApi {
     })
     @PostMapping("hazard/toxval/search/by-dtxsid/")
     @ResponseBody
-    List<ToxValDb> hazardBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<ToxValDb> toxValDbDataByBatchDtxsid(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                 @RequestBody String[] dtxsids);
