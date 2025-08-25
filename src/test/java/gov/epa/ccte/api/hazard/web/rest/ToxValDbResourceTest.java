@@ -113,7 +113,7 @@ class ToxValDbResourceTest {
     
 
     @Test
-    void testGetHazardDataByDtxsid() throws Exception {
+    void testGetToxValDbDataByDtxsid() throws Exception {
         final List<ToxValDb> hazardData = Collections.singletonList(toxValDb);
 
         when(toxValDbRepository.findAllByDtxsid("DTXSID7020182", ToxValDb.class)).thenReturn(hazardData);
@@ -126,7 +126,7 @@ class ToxValDbResourceTest {
     
 
     @Test
-    void testHazardDataByBatchDtxsid() throws Exception {
+    void testToxValDbDataByBatchDtxsid() throws Exception {
     	final List<ToxValDb> hazardData = Collections.singletonList(toxValDb);
         String[] jsonArray = {"DTXSID7020182"};
         String jsonBody = new ObjectMapper().writeValueAsString(jsonArray);
