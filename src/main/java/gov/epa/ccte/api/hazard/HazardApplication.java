@@ -2,15 +2,17 @@ package gov.epa.ccte.api.hazard;
 
 import gov.epa.ccte.api.hazard.config.ApplicationProperties;
 import gov.epa.ccte.api.hazard.config.Constants;
+import gov.epa.ccte.api.hazard.config.DefaultProfileUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
-import org.apache.commons.lang3.StringUtils;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
@@ -18,7 +20,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @Slf4j
-@SpringBootApplication
+@SpringBootApplication (exclude = {ErrorMvcAutoConfiguration.class} )
 @EnableConfigurationProperties({ApplicationProperties.class})
 public class HazardApplication {
 
@@ -56,6 +58,7 @@ public class HazardApplication {
 		log.info("*** Application is started. ***");
 
 		SpringApplication app = new SpringApplication(HazardApplication.class);
+		DefaultProfileUtil.addDefaultProfile(app); // local profile is default
 		ConfigurableApplicationContext ctx = app.run(args);
 		Environment env = ctx.getEnvironment();
 

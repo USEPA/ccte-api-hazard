@@ -3,7 +3,6 @@ package gov.epa.ccte.api.hazard.config;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.web.cors.CorsConfiguration;
 
 /**
  * Properties specific to Chemical.
@@ -16,11 +15,15 @@ import org.springframework.web.cors.CorsConfiguration;
 public class ApplicationProperties {
 
     private String apiKeyName;
+    private String apiEnv;
+    private String apiUrl;
+    private Integer batchSize;
+
 //    private String docHostReplacement;
 //    private int docHostPort;
 //    private String docHostHttpProtocol;
 //    private Integer startPort;
 //    private Integer endPort;
 //    private Integer serverPort;
-    private final CorsConfiguration cors = new CorsConfiguration();
+    //private final CorsConfiguration cors = new CorsConfiguration();
 }

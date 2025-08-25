@@ -5,25 +5,24 @@ import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
+import org.springframework.context.annotation.Configuration;
 
 
-//@Configuration
+
+@Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "CCTE Hazard APIs",
-                description = "This is the part of CCTE Public APIs and provides hazard data through a set of API endpoints. User has the option to get all the data or only data related to human health or related to eco tox.",
+                title = "Computational Toxicology and Exposure Data APIs - Hazard",
+                description = "The Hazard APIs are part of a set of public computational toxicology and exposure APIs and provide hazard data through a set of API endpoints. Users have the option to get all the data or only data related to human health or related to ecotoxicology.",
                 contact = @Contact(
-                        name = "Asif Rashid",
+                        name = "",
                         url = "",
-                        email = "rashid.asif@epa.gov"
-                ),
-                license = @License(
-                        name = "No Licence",
-                        url = "")),
-        servers = @Server(url = "http://api-ccte.epa.gov")
+                        email = ""),
+                version = "1.0.0"
+        ),
+        servers = { @Server(url = "${application.api-url}", description = "${application.api-env}")}
 )
 @SecurityScheme(
         type = SecuritySchemeType.APIKEY,

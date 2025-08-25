@@ -2,14 +2,16 @@
 applications:
   - name: ccte-hazard-stg
     routes:
+#      - route: ccte-api-p.app.cloud.gov
       #- route: ccte-hazard-p.app.cloud.gov
-      - route: ccte-api-stg.app.cloud.gov/hazard
       - route: api-ccte-stg.epa.gov/hazard
+      #- route: ccte-api.app.cloud.gov/hazard
     memory: 2G
     instances: 1
     random-route: false
-    path: target/hazard.jar
+    path: target/hazard-2.0.0.jar
     buildpacks:
     - https://github.com/cloudfoundry/java-buildpack
     env:
       SPRING_PROFILES_ACTIVE: cloud,apikey
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+}}'
