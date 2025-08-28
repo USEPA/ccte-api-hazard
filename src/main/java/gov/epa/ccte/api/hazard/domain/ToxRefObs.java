@@ -7,7 +7,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 
@@ -15,6 +18,9 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Schema(description = "Export of all observations and endpoint observation status according to a relevant guideline profile for the chemicals, studies, or study types listed in the input. Given ToxRefDB curations are guideline studies with specific testing requirements, guideline profiles are used to populate a list of observations that should be reported and tested within the study, i.e. endpoint observation status. Endpoint Observation status enables automated distinction of true negatives (i.e. tested with no effect observed) and better understanding of false negative (i.e. missing) effects.")
 @Entity
 @Immutable
