@@ -6,11 +6,11 @@ public interface CcdGenetoxDetail {
 	String getSource();
 	String getAssayCategory();
 	String getAssayType();
-	String getMetabolicActivation();
+	Integer getMetabolicActivation();
 	String getSpecies();
 	String getStrain();
 	String getAssayResult();
-	Integer getYear();
+	String getYear();
 	
 	Void setDtxsid(String dtxsid);
 	Void setSource(String source);
