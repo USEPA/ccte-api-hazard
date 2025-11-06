@@ -119,7 +119,7 @@ public class GenetoxDetail {
     @Size(max = 45)
     @Column(name = "metabolic_activation", length = 45)
     @Schema(description = "Indicator if assay included metabolic activation")
-    private Integer metabolicActivation;
+    private String metabolicActivation;
     
     @Column(name = "micronucleus")
     private String micronucleus;
