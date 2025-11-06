@@ -6,7 +6,7 @@ public interface CcdGenetoxDetail {
 	String getSource();
 	String getAssayCategory();
 	String getAssayType();
-	Integer getMetabolicActivation();
+	String getMetabolicActivation();
 	String getSpecies();
 	String getStrain();
 	String getAssayResult();
@@ -16,7 +16,7 @@ public interface CcdGenetoxDetail {
 	Void setSource(String source);
 	Void setAssayCategory(String assayCategory);
 	Void setAssayType(String assayType);
-	Void setMetabolicActivation(Integer metabolicActivation);
+	Void setMetabolicActivation(String metabolicActivation);
 	Void setSpecies(String species);
 	Void setStrain(String strain);
 	Void setAssayResult(String assayResult);
