@@ -42,6 +42,21 @@ public interface ToxValDbApi {
                                    @PathVariable("dtxsid") String dtxsid);
 
     /**
+     * {@code GET  hazard/search/by-dtxsid/{dtxsid} : get list of hazard data for the "dtxsid".
+     * @param dtxsid the matching dtxsid of the hazard data to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
+     */
+    @Operation(summary = "Get all data by dtxsid")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
+                    schema = @Schema(oneOf = { ToxValDb.class})))
+    })
+    @GetMapping("hazard/toxval/search/by-category/{dtxsid}")
+    @ResponseBody
+    List<ToxValDb> getToxValDbDataByDtxsidAndCategory(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
+    								@PathVariable("dtxsid") String dtxsid, @RequestParam(value = "category", required = true) String category);
+    
+    /**
      * {@code POST  hazard/search/by-dtxsid/ : get list of hazard data for the "dtxsid".
      * @param dtxsid the matching dtxsid of the hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
@@ -61,5 +76,20 @@ public interface ToxValDbApi {
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                 @RequestBody String[] dtxsids);
+    
+    /**
+     * {@code GET  hazard/toxval/supercategory/search/by-dtxsid/{dtxsid} : get list of toxval supercategories for the "dtxsid".
+     * @param dtxsid the matching dtxsid of the toxval supercategories to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
+     */
+    @Operation(summary = "Get all toxval supercategories by dtxsid")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
+                    schema = @Schema(oneOf = { ToxValDb.class})))
+    })
+    @GetMapping("hazard/toxval/supercategory/search/by-dtxsid/{dtxsid}")
+    @ResponseBody
+    List getToxValSuperCategoriesByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
+                                   @PathVariable("dtxsid") String dtxsid);
 
 }

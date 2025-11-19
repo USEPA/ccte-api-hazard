@@ -39,6 +39,17 @@ public class ToxValDbResource implements ToxValDbApi {
 
     @Override
     public @ResponseBody
+    List<ToxValDb> getToxValDbDataByDtxsidAndCategory(String dtxsid, String category) {
+        log.debug("all ToxValDb for dtxsid = {} and category = {}", dtxsid, category);
+
+        List<ToxValDb> data = repository.findAllByDtxsidAndToxvalTypeSuperCategory(dtxsid, category,  ToxValDb.class);
+        log.debug("data size = {}", data.size());
+
+        return data;
+    }
+    
+    @Override
+    public @ResponseBody
     List<ToxValDb> toxValDbDataByBatchDtxsid(String[] dtxsids) {
 
         log.debug("all ToxValDb for dtxsid size = {}", dtxsids.length);
@@ -47,6 +58,17 @@ public class ToxValDbResource implements ToxValDbApi {
             throw new HigherNumberOfDtxsidException(dtxsids.length, batchSize);
 
         List<ToxValDb> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, ToxValDb.class);
+        log.debug("data size = {}", data.size());
+
+        return data;
+    }
+    
+    @Override
+    public @ResponseBody
+    List getToxValSuperCategoriesByDtxsid(String dtxsid) {
+        log.debug("all ToxVal Supercategories for dtxsid = {}", dtxsid);
+
+        List<ToxValDb> data = repository.findToxvalTypeSuperCategoryByDtxsid(dtxsid);
         log.debug("data size = {}", data.size());
 
         return data;
