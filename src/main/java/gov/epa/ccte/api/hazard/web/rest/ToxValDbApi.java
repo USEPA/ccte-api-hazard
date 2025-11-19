@@ -42,11 +42,11 @@ public interface ToxValDbApi {
                                    @PathVariable("dtxsid") String dtxsid);
 
     /**
-     * {@code GET  hazard/search/by-dtxsid/{dtxsid} : get list of hazard data for the "dtxsid".
-     * @param dtxsid the matching dtxsid of the hazard data to retrieve.
+     * {@code GET  hazard/toxval/search/by-category/{dtxsid} : get list of hazard data for the "dtxsid" AND toxval type supercategory.
+     * @param dtxsid and category the matching dtxsid and category of the hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get all data by dtxsid")
+    @Operation(summary = "Get all data by dtxsid and category")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = { ToxValDb.class})))
