@@ -6,7 +6,7 @@
 
 ## Welcome to the GitHub repository for the CTX Hazard API
 
-Originating from the US EPA's Center of Computational Toxicology and Exposure (CCTE), the CTX Hazard API is a RESTful API designed to manage and provide Exposure data. It interacts with a PostgreSQL database and offers various endpoints for hazard information. More information on the CTX API development and utility, as well as guidance on how to technically access and use them, is available here: https://www.epa.gov/comptox-tools/computational-toxicology-and-exposure-apis
+Originating from the US EPA's Center of Computational Toxicology and Exposure (CCTE), the CTX Hazard API is a RESTful API designed to manage and provide Hazard data. It interacts with a PostgreSQL database and offers various endpoints for hazard information. More information on the CTX API development and utility, as well as guidance on how to technically access and use them, is available here: https://www.epa.gov/comptox-tools/computational-toxicology-and-exposure-apis
 
 - If you would like to report a bug or have other questions related to the CTX APIs, please contact the [CTX API Admins](mailto:ccte_api@epa.gov).
 - If you are interested in contributing, please submit a issue or start a discussion. See [CONTRIBUTING](https://github.com/USEPA/ccte-api-exposure/blob/dev/CONTRIBUTING.md) for more information.
