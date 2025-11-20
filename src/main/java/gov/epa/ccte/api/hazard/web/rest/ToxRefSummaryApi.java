@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxRefSummary}s.
  */
 @Tag(name = "ToxRefDB Summary Resource",
-        description = "API endpoints for collecting ToxRefDB summary data.")
+        description = "Collection of endpoints for guideline and guideline-like in vivo toxicity data curated in the US EPA's Toxicity Reference Database (ToxRefDB). This resource provides study-chemical coverage summary information.")
 @SecurityRequirement(name = "api_key")
 public interface ToxRefSummaryApi {
     /**
@@ -29,7 +29,7 @@ public interface ToxRefSummaryApi {
      * @param study-id the matching study-id of the ToxRefDB data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB data summaries}.
      */
-    @Operation(summary = "Get data by study id")
+    @Operation(summary = "Get summary data by Study ID", description = "return ToxRefDB summary information by study id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefSummary.class})))
@@ -43,7 +43,7 @@ public interface ToxRefSummaryApi {
      * @param dtxsid the matching dtxsid of the ToxRefDB data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB data summaries}.
      */
-    @Operation(summary = "Get data by dtxsid")
+    @Operation(summary = "Get summary data by DTXSID", description = "return ToxRefDB summary information by DTXSID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefSummary.class})))
@@ -58,7 +58,7 @@ public interface ToxRefSummaryApi {
      * @param study-id the matching study-id of the ToxRefDB data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB data summaries}.
      */
-    @Operation(summary = "Get data by study type")
+    @Operation(summary = "Get summary data by Study Type", description = "return ToxRefDB summary information by study type")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefSummary.class})))

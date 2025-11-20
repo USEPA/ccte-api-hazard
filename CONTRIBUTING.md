@@ -1,4 +1,3 @@
-
 Thank you for considering contributing to this project! Contributions are welcome and appreciated. Please follow the guidelines below to ensure a smooth collaboration.
 
 ## How to Contribute
@@ -52,7 +51,6 @@ This project is licensed under the [MIT License](LICENSE.md). By contributing to
 - If you have any questions or need assistance, feel free to reach out to the project maintainers.
 - We appreciate your time and effort in contributing to this project!
 - Happy coding!
-- 
 
     
 

@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxValDb}s.
  */
-@Tag(name = "ToxValDb Resource",
-        description = "API endpoints for collecting ToxValDb data for specified chemical identifier (DTXSID).")
+@Tag(name = "ToxValDB Resource",
+        description = "Collection of endpoints for human-relevant hazard data curated in the Toxicity Values Database (ToxValDB). ToxValDB is a compilation of information sourced from multiple public datasets, databases and open literature and includes data on thousands of chemicals from tens of thousands of records, with an emphasis on quantitative estimates of relevant points-of-departure from in vivo toxicology studies, such as no- and low- observable adverse effect levels, screening levels, reference doses, tolerable daily intake, etc.")
 @SecurityRequirement(name = "api_key")
 public interface ToxValDbApi {
 
@@ -31,7 +31,7 @@ public interface ToxValDbApi {
      * @param dtxsid the matching dtxsid of the hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get all data by dtxsid")
+    @Operation(summary = "Get data by DTXSID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = { ToxValDb.class})))
@@ -46,13 +46,13 @@ public interface ToxValDbApi {
      * @param dtxsid the matching dtxsid of the hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get all data by batch of dtxsid(s).", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
+    @Operation(summary = "Get data for a batch of DTXSID(s).", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = { ToxValDb.class}))),
-            @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
+            @ApiResponse(responseCode = "400", description = "User has submitted more than allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
-                            examples = {@ExampleObject(value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
+                            examples = {@ExampleObject(value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports requests of '200' DTXSIDs at one time, '202' were submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
                             schema = @Schema(oneOf = {ProblemDetail.class})))
     })
     @PostMapping("hazard/toxval/search/by-dtxsid/")

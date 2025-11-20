@@ -20,7 +20,7 @@ import java.util.List;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxRefObs}s.
  */
 @Tag(name = "ToxRefDB Observation Resource",
-        description = "API endpoints for collecting ToxRefDB observation data.")
+        description = "Collection of endpoints for guideline and guideline-like in vivo toxicity data curated in the US EPA's Toxicity Reference Database (ToxRefDB). This resource provides an export of observations and endpoint observation status according to a relevant guideline profile.")
 @SecurityRequirement(name = "api_key")
 public interface ToxRefObsApi {
     /**
@@ -28,7 +28,7 @@ public interface ToxRefObsApi {
      * @param study-id the matching study-id of the ToxRefDB observations to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB observations}.
      */
-    @Operation(summary = "Get observations by study id")
+    @Operation(summary = "Get observations by Study ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefObs.class})))
@@ -42,7 +42,7 @@ public interface ToxRefObsApi {
      * @param dtxsid the matching dtxsid of the ToxRefDB observations to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB observations}.
      */
-    @Operation(summary = "Get observations by dtxsid")
+    @Operation(summary = "Get observations by DTXSID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefObs.class})))
@@ -56,7 +56,7 @@ public interface ToxRefObsApi {
      * @param study-id the matching study-id of the ToxRefDB observations to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB observations }.
      */
-    @Operation(summary = "Get observations by study type")
+    @Operation(summary = "Get observations by Study Type")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefObs.class})))
