@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.SkinEye}s.
  */
-@Tag(name = "ToxValDb Skin Eye Resource",
-        description = "API endpoints for collecting skin eye data.")
+@Tag(name = "ToxValDB Skin Eye Resource",
+        description = "Collection of endpoints with skin sensitization and eye irritation data. This curated data is sourced from the US EPA's Toxicity Values Database (ToxValDB).")
 @SecurityRequirement(name = "api_key")
 public interface SkinEyeApi {
     /**
@@ -30,7 +30,7 @@ public interface SkinEyeApi {
      * @param dtxsid the matching dtxsid of the skin eye data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of skin eye}.
      */
-    @Operation(summary = "Get data by dtxsid")
+    @Operation(summary = "Get data by DTXSID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {SkinEye.class})))
@@ -44,13 +44,13 @@ public interface SkinEyeApi {
      * @param dtxsid the matching dtxsid of the skin eye data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of skin eye}.
      */
-    @Operation(summary = "Get data by batch of dtxsid(s)", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
+    @Operation(summary = "Get data for a batch of DTXSID(s)", description = "return skin-eye data for requested DTXSIDs. Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {SkinEye.class}))),
-            @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
+            @ApiResponse(responseCode = "400", description = "User has submitted more than allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
-                            examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
+                            examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports requests of '200' DTXSIDs at one time, '202' were submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
                             schema = @Schema(oneOf = {ProblemDetail.class})))
     })
     @PostMapping(value = "/hazard/skin-eye/search/by-dtxsid/")

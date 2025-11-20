@@ -14,13 +14,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "Computational Toxicology and Exposure Data APIs - Hazard",
-                description = "The Hazard APIs are part of a set of public computational toxicology and exposure APIs and provide hazard data through a set of API endpoints. Users have the option to get all the data or only data related to human health or related to ecotoxicology.",
+                title = "Computational Toxicology and Exposure (CTX) APIs - CTX Hazard API",
+                description = "The CTX Hazard API is part of US EPA's Computational Toxicology and Exposure APIs. The CTX Hazard API provides programmtic access to hazard data through a set of endpoints.",
                 contact = @Contact(
                         name = "",
                         url = "",
                         email = ""),
-                version = "1.0.0"
+                version = "1.1.0"
         ),
         servers = { @Server(url = "${application.api-url}", description = "${application.api-env}")}
 )
@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Configuration;
         type = SecuritySchemeType.APIKEY,
         name = "api_key",
         in = SecuritySchemeIn.HEADER,
-        description = "Each API call should have api_key, Contact author for getting the new api_key. ",
+        description = "Each API request requires an api_key. Contact the CTX API Admin to request an API Key.",
         paramName = "x-api-key"
 )
 public class OpenApiConfig {

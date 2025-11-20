@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * REST controller for getting the {@link HazardResource}s.
  */
-@Tag(name = "Hazard Data Resource",
-        description = "API endpoint for checking database connection of hazard application.")
+@Tag(name = "Hazard API Health Resource",
+        description = "Endpoint for checking health of database connection used by CTX Hazard API")
 public interface HazardApi {
     @SuppressWarnings("rawtypes")
     @Hidden
