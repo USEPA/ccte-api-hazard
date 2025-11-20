@@ -23,8 +23,8 @@ import java.util.List;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.CancerSummary}s.
  */
 
-@Tag(name = "ToxValDb Cancer Summary Resource",
-        description = "API endpoints for collecting cancer summary data.")
+@Tag(name = "ToxValDB Cancer Summary Resource",
+        description = "Collection of endpoints with cancer summary data. This curated data is sourced from the US EPA's Toxicity Values Database (ToxValDB).")
 @SecurityRequirement(name = "api_key")
 @RequestMapping( value = "hazard/cancer-summary", produces = MediaType.APPLICATION_JSON_VALUE)
 public interface CancerSummaryApi {
@@ -33,7 +33,7 @@ public interface CancerSummaryApi {
      * @param dtxsid the matching dtxsid of the cancer summary data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of cancer summary}.
      */
-    @Operation(summary = "Get data by dtxsid")
+    @Operation(summary = "Get data by DTXSID", description = "return cancer summary data for requested DTXSID")
     @GetMapping(value = "/search/by-dtxsid/{dtxsid}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
@@ -47,18 +47,18 @@ public interface CancerSummaryApi {
      * @param dtxsid the matching dtxsid of the cancer summary data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of cancer summary}.
      */
-    @Operation(summary = "Get data by batch of dtxsid(s)", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
+    @Operation(summary = "Get data for a batch of DTXSIDs", description = "return cancer summary data for requested DTXSIDs. Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfull", content = @Content(mediaType = "application/json",
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {CancerSummary.class}))),
-            @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
+            @ApiResponse(responseCode = "400", description = "User has submitted more than allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
-                            examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
+                            examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports requests of '200' dtxsids at one time, '202' were submitted.\"}", description = "Validation error for more than allowed number of dtxsid(s).")},
                             schema = @Schema(oneOf = {ProblemDetail.class})))
     })
     @PostMapping(value = "/search/by-dtxsid/")
     @ResponseBody
-    List<CancerSummary> cancerSummaryBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<CancerSummary> cancerSummaryBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifiers",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                               @RequestBody String[] dtxsids);

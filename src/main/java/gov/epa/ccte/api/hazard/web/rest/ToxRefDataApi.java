@@ -20,7 +20,7 @@ import java.util.List;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxRefData}s.
  */
 @Tag(name = "ToxRefDB Data Resource",
-        description = "API endpoints for collecting ToxRefDB data.")
+        description = "Collection of endpoints for guideline and guideline-like in vivo toxicity data curated in the US EPA's Toxicity Reference Database (ToxRefDB). This resource provides an export of all extracted dose-treatment group-effect information as well as doses not eliciting effects.")
 @SecurityRequirement(name = "api_key")
 public interface ToxRefDataApi {
     /**
@@ -28,7 +28,7 @@ public interface ToxRefDataApi {
      * @param study-id the matching study-id of the ToxRefDB data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB data}.
      */
-    @Operation(summary = "Get data by study id")
+    @Operation(summary = "Get all data by Study ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefData.class})))
@@ -42,7 +42,7 @@ public interface ToxRefDataApi {
      * @param dtxsid the matching dtxsid of the ToxRefDB data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB data}.
      */
-    @Operation(summary = "Get data by dtxsid")
+    @Operation(summary = "Get all data by DTXSID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefData.class})))
@@ -57,7 +57,7 @@ public interface ToxRefDataApi {
      * @param study-id the matching study-id of the ToxRefDB data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB data }.
      */
-    @Operation(summary = "Get data by study type")
+    @Operation(summary = "Get all data by Study Type")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefData.class})))

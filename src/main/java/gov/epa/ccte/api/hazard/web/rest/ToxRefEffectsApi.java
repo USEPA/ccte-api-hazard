@@ -20,7 +20,7 @@ import java.util.List;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxRefEffects}s.
  */
 @Tag(name = "ToxRefDb Effects Resource",
-        description = "API endpoints for collecting ToxRefDB effects data.")
+        description = "Collection of endpoints for guideline and guideline-like in vivo toxicity data curated in the US EPA's Toxicity Reference Database (ToxRefDB). This resource provides an export of all extracted dose-treatment group-effect information.")
 @SecurityRequirement(name = "api_key")
 public interface ToxRefEffectsApi {
     /**
@@ -28,7 +28,7 @@ public interface ToxRefEffectsApi {
      * @param study-id the matching study-id of the ToxRefDB effects information to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB effects information}.
      */
-    @Operation(summary = "Get data by study id")
+    @Operation(summary = "Get effects data by Study ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefEffects.class})))
@@ -43,7 +43,7 @@ public interface ToxRefEffectsApi {
      * @param dtxsid the matching dtxsid of the ToxRefDB effects information to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB effects information}.
      */
-    @Operation(summary = "Get data by dtxsid")
+    @Operation(summary = "Get effects data by DTXSID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefEffects.class})))
@@ -58,7 +58,7 @@ public interface ToxRefEffectsApi {
      * @param study-id the matching study-id of the ToxRefDB effects information to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of ToxRefDB effects information}.
      */
-    @Operation(summary = "Get data by study type")
+    @Operation(summary = "Get effects data by Study Type")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefEffects.class})))
