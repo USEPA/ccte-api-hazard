@@ -25,8 +25,8 @@ import java.util.List;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.GenetoxDetail}s. and
  */
 
-@Tag(name = "ToxValDb Genetox Resource",
-        description = "API endpoints for collecting Genetox data.")
+@Tag(name = "ToxValDB Genetox Resource",
+        description = "Collection of endpoints with genetoxicity data. This curated data is sourced from the US EPA's Toxicity Values Database (ToxValDB).")
 @SecurityRequirement(name = "api_key")
 @RequestMapping( value = "hazard/genetox", produces = MediaType.APPLICATION_JSON_VALUE)
 public interface GenetoxApi {
@@ -35,7 +35,7 @@ public interface GenetoxApi {
      * @param dtxsid the matching dtxsid of the genetox summary data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of genetox summary}.
      */
-    @Operation(summary = "Get summary data by dtxsid")
+    @Operation(summary = "Get summary data by DTXSID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {GenetoxSummary.class})))
@@ -49,13 +49,13 @@ public interface GenetoxApi {
      * @param dtxsid the matching dtxsid of the genetox summary data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of genetox summary}.
      */
-    @Operation(summary = "Get summary data by batch of dtxsid(s).", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
+    @Operation(summary = "Get summary data for a batch of DTXSID", description = "return genetox summary data for requested DTXSIDs. Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {GenetoxSummary.class}))),
-            @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
+            @ApiResponse(responseCode = "400", description = "When user has submitted more than allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
-                            examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
+                            examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"SSystem supports requests of '200' DTXSIDs at one time, '202' were submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
                             schema = @Schema(oneOf = {ProblemDetail.class})))
     })
     @PostMapping(value = "/summary/search/by-dtxsid/")
@@ -70,11 +70,10 @@ public interface GenetoxApi {
      * @param dtxsid the matching dtxsid of the genetox detail data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of genetox detail}.
      */
-    @Operation(summary = "Get detail data by dtxsid with ccd projection",
-    				description = "return genetox details for requested dtxsid"+
-                            "there is an available projection for ccd  Genetoxicity Details page:" +
-   				         "ccd-genetox-details" +
-                            "If no projection is specified, the default GenetoxDetails data will be returned")
+    @Operation(summary = "Get detailed data by DTXSID with CCD projection",
+    				description = "return genetox details for requested DTXSID. There is an available projection aligned with what's available on the CCD Genetoxicity Details page:" +
+   				         "ccd-genetox-details. " +
+                            "If no projection is specified, the default GenetoxDetails data will be returned.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {GenetoxDetail.class, CcdGenetoxDetail.class})))
@@ -83,8 +82,8 @@ public interface GenetoxApi {
     @ResponseBody
     List<?> getGenetoxDetailsByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") 
     									@PathVariable("dtxsid") String dtxsid,
-    									@Parameter(description = "Specifies if projection is used. Option: ccd-genetox-details, " +
-    											"If omitted, the default GenetoxDetail data is returned.")
+    									@Parameter(description = "Specifies if projection is used. Option: ccd-genetox-details. " +
+    											"If no projection is specified, the default GenetoxDetail projection is returned.")
     									@RequestParam(value = "projection", required = false) String projection);
 
     /**
@@ -92,13 +91,13 @@ public interface GenetoxApi {
      * @param dtxsid the matching dtxsid of the genetox detail data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of genetox detail}.
      */
-    @Operation(summary = "Get detail data by batch of dtxsid(s)", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
+    @Operation(summary = "Get detailed data for a batch of DTXSIDs", description = "return detailed data for requested DTXSIDs. Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {GenetoxDetail.class}))),
-            @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
+            @ApiResponse(responseCode = "400", description = "User has submitted more than allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
-                            examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
+                            examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports requests of '200' DTXSIDs at one time, '202' were submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
                             schema = @Schema(oneOf = {ProblemDetail.class})))
     })
     @PostMapping(value = "/details/search/by-dtxsid/")

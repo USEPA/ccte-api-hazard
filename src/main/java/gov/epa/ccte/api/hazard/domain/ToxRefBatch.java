@@ -1,5 +1,6 @@
 package gov.epa.ccte.api.hazard.domain;
 
+
 import org.hibernate.annotations.Immutable;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -8,11 +9,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Schema(description = "Export of all extracted dose-treatment group-effect information as well as doses not eliciting effects from ToxRefDB for the dtxsids listed in the input. Data from ToxRefDB is also summarized in ToxValDB, including inferred NEL and NOAEL effect levels based on the reported LEL and LOAEL, respectively.")
 @Entity
 @Immutable

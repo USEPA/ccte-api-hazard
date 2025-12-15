@@ -1,8 +1,7 @@
 package gov.epa.ccte.api.hazard.domain;
 
 
-
-import java.sql.Date;
+import java.time.LocalDate;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
@@ -10,12 +9,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Schema(description = "Integrated Risk Information System (IRIS): EPA's IRIS Program identifies and characterizes the health hazards of chemicals found in the environment. Each IRIS assessment can cover a chemical, a group of related chemicals, or a complex mixture. IRIS assessments are an important source of toxicity information used by EPA, state and local health agencies, other federal agencies, and international health organizations.")
 @Table(name = "iris_data", schema = "iris")
 public class Iris {
@@ -32,7 +37,7 @@ public class Iris {
 	private String casrn;
 	
 	@Column(name = "last_significant_revision")
-	private Date lastSignificantRevision;
+	private LocalDate lastSignificantRevision;
 	
 	@Column(name = "literature_screening_review")
 	private String literatureScreeningReview;

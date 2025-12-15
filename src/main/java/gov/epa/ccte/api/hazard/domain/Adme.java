@@ -7,12 +7,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Schema(description = "The information here describes toxicokinetics in humans. Values are 1) measured either in vitro or in vivo, 2) predicted from chemical properties using in silico tools, or 3) computed with mathematical models simulating toxicokinetics. Note: intrinsic hepatic clearance and fraction unbound in plasma values can have measured values listed, but these may be assumed from measured data using a surrogate species. The Data Source Species column identifies the measured data species source. We use these assumed measured values in calculations to estimate other outcomes, such as volume of distribution, PK half life, and steady-state plasma concentration. The in vitro measured values reflect the value curated for the open source R package “httk”. The computed values are generated with httk using the reported in vitro values. \"https://CRAN.R-project.org/package=httk\". The in vivo measured values are estimated from toxicokinetic concentration vs. time contained in the CvTdb (https://doi.org/10.1038/s41597-020-0455-1). In vivo estimates are calculated using R package “invivoPKfit” (https://github.com/USEPA/CompTox-ExpoCast-invivoPKfit)")
 @Table(name = "mv_ivive", schema = "adme")
 public class Adme {

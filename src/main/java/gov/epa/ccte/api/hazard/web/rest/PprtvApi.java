@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.Pprtv}s.
  */
 @Tag(name = "PPRTV Resource",
-        description = "API endpoints for collecting pprtv chemical data for specified chemical identifier (DTXSID).")
+        description = "Endpoint with PPRTV data. A Provisional Peer-Reviewed Toxicity Value (PPRTV) is a toxicity value primarily derived for use in EPA's Superfund Program. PPRTVs are derived from a review of the relevant scientific literature using EPA methods, sources of data and guidance for value derivation. A link is available on the CompTox Chemicals Dashboard (CCD) Literature> PPRTV tab.")
 @SecurityRequirement(name = "api_key")
 public interface PprtvApi {
     /**
@@ -29,13 +29,13 @@ public interface PprtvApi {
      * @param dtxsid the matching dtxsid of the pprtv chemical data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get all pprtv chemical data by dtxsid")
+    @Operation(summary = "Get PPRTV data by DTXSID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = { Pprtv.class})))
     })
     @GetMapping("hazard/pprtv/search/by-dtxsid/{dtxsid}")
     @ResponseBody
-    List<Pprtv> pprtvChemicalsByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182")
+    List<Pprtv> pprtvChemicalsByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID2040282")
                                    @PathVariable("dtxsid") String dtxsid);
 }

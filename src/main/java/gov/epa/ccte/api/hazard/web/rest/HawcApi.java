@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.Hawc}s.
  */
 @Tag(name = "HAWC Resource",
-        description = "API endpoints for collecting CCD - EPA HAWC link mapper for specified chemical identifier (DTXSID).")
+        description = "Endpoint used by the populate CompTox Chemicals Dashboard (CCD) Literature> EPA HAWC tab. Health Assessment Workspace Collaborative (HAWC) is an interactive, expert-driven, content management system for human health assessments that is intended to promote transparency, data usability, and understanding of the data and decisions supporting an environmental and human health assessment. Links will be only be available for public assessments in HAWC.")
 @SecurityRequirement(name = "api_key")
 public interface HawcApi {
 
@@ -31,7 +31,7 @@ public interface HawcApi {
      * @param dtxsid the matching dtxsid of the CCD - EPA HAWC link mapper to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of CCD - EPA HAWC link mapper}.
      */
-    @Operation(summary = "Get CCD - EPA HAWC link mapper by dtxsid")
+    @Operation(summary = "Get HAWC link by DTXSID", description = "return HAWC link for requested DTXSID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = { Hawc.class}))),

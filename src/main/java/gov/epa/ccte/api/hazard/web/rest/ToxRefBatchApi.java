@@ -22,8 +22,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 /**
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxRefBatch}s.
  */
-@Tag(name = "ToxRefDB Batch Resource",
-        description = "API endpoints for collecting ToxRef data by batch of dtxsids.")
+@Tag(name = "ToxRefDB CCD Batch Resource",
+        description = "Endpoint to support CompTox Chemicals Dashboard> Batch Search functionality of ToxRefDB data.")
 @SecurityRequirement(name = "api_key")
 public interface ToxRefBatchApi {
 
@@ -32,13 +32,13 @@ public interface ToxRefBatchApi {
      * @param dtxsid the matching dtxsid of the toxref data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of toxref batch data}.
      */
-    @Operation(summary = "Get data by batch of dtxsid(s)", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
+    @Operation(summary = "Get data for a batch of DTXSID(s)", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefBatch.class}))),
-            @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
+            @ApiResponse(responseCode = "400", description = "User has submitted more than allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
-                            examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
+                            examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports requests of '200' DTXSIDs at one time, '202' were submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
                             schema = @Schema(oneOf = {ProblemDetail.class})))
     })
     @PostMapping(value = "/hazard/toxref/search/by-dtxsid/")
