@@ -85,3 +85,8 @@ application:
 #   exposed-headers: "Authorization,Link,X-Total-Count"
 #   allow-credentials: true
 #   max-age: 1800
+
+sentry:
+  dsn: https://6c3c9f715a1e6ae814e0f85510b8b9e6@ccte-app-monitoring.epa.gov/77
+  traces-sample-rate: 1.0  # Captures 100% of transactions for performance monitoring
+  environment: ${spring.profiles.active:default}
