@@ -18,6 +18,7 @@
 		<testcontainers.version>1.17.6</testcontainers.version>
 		<lombok.version>1.18.30</lombok.version>
 		<mapstruct.version>1.5.3.Final</mapstruct.version>
+		<sentry.version>8.18.0</sentry.version>
 	</properties>
 
 	<distributionManagement>
@@ -100,6 +101,11 @@
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.3.Final</version>
 		</dependency>
+		<dependency>
+            <groupId>io.sentry</groupId>
+            <artifactId>sentry-spring-boot-starter-jakarta</artifactId>
+            <version>${sentry.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
