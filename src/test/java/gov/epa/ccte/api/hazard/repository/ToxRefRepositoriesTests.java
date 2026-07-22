@@ -1,12 +1,12 @@
 package gov.epa.ccte.api.hazard.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -15,20 +15,11 @@ import gov.epa.ccte.api.hazard.domain.ToxRefEffects;
 import gov.epa.ccte.api.hazard.domain.ToxRefObs;
 import gov.epa.ccte.api.hazard.domain.ToxRefSummary;
 
-import javax.sql.DataSource;
-
-import static org.assertj.core.api.Assertions.*;
-
 @Sql(scripts = {"/schema.sql", "/data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @DataJpaTest(properties = "spring.sql.init.mode=never")
 @ActiveProfiles("test")
 public class ToxRefRepositoriesTests {
-    @Autowired
-    private DataSource dataSource;
-    @Autowired 
-    private JdbcTemplate jdbcTemplate;
-    @Autowired 
-    private TestEntityManager entityManager;
+   
     @Autowired
     private	ToxRefDataRepository data;
     @Autowired
@@ -38,17 +29,6 @@ public class ToxRefRepositoriesTests {
     @Autowired
     private ToxRefSummaryRepository summary;
     
-    @Test
-    void injectedComponentsAreNotNull() {
-        assertThat(dataSource).isNotNull();
-        assertThat(jdbcTemplate).isNotNull();
-        assertThat(entityManager).isNotNull();
-        assertThat(data).isNotNull();
-        assertThat(effects).isNotNull();
-        assertThat(observations).isNotNull();
-        assertThat(summary).isNotNull();
-        
-    }
     
     @Test
     void testDataLoaded(){
