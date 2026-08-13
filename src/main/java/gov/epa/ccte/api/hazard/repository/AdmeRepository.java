@@ -3,7 +3,7 @@ package gov.epa.ccte.api.hazard.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ public interface AdmeRepository extends JpaRepository<Adme, Integer>{
     @Transactional(readOnly = true)
     <T>List<T> findByDtxsid(String dtxsid, Class<T> type);
     
-    @Query(value = """
+    @NativeQuery("""
 			SELECT
 			    adme.dtxsid,
 			    adme.measured,
@@ -49,7 +49,7 @@ public interface AdmeRepository extends JpaRepository<Adme, Integer>{
 			    adme.mv_ivive adme     					  					
 			WHERE
 			    adme.dtxsid = :dtxsid
-		""", nativeQuery = true)
+		""")
     	List<CcdADME> findByDtxsidWithLabelColumn(@Param("dtxsid")String dtxsid);
     
 }

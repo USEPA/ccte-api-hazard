@@ -4,9 +4,8 @@ import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import gov.epa.ccte.api.hazard.domain.Hawc;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,7 +35,7 @@ public interface HawcApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = { Hawc.class}))),
     })
-    @RequestMapping(value = "hazard/hawc/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "hazard/hawc/search/by-dtxsid/{dtxsid}", produces = MediaType.APPLICATION_JSON_VALUE)
     List<Hawc> hawcDataByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") 
     						@PathVariable("dtxsid") String dtxsid);
 }

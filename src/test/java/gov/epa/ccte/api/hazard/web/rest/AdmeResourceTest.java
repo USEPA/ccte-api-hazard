@@ -5,10 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 //This will test REST end-points in the AdmeResource.java using WebMvcTest and MockitoBean
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.test.context.ActiveProfiles;
@@ -26,50 +29,51 @@ import gov.epa.ccte.api.hazard.repository.AdmeRepository;
 import java.util.*;
 
 @ActiveProfiles("test")
+@MockitoSettings(strictness = Strictness.WARN)
 @WebMvcTest(AdmeResource.class)
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 class AdmeResourceTest {
-	
+
     @Autowired
     private MockMvc mockMvc;
-    
+
     @MockitoBean
     private AdmeRepository admeRepository;
-    
+
     private Adme adme;
     private CcdADME ccdADME;
     private ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
-    
+
     @BeforeEach
     void setUp() {
-    	
-    	adme = Adme.builder()
-    			.id(104519)
-    			.dtxsid("DTXSID7020182")
-    			.description("Clint")
-    			.measured("19.9")
-    			.predicted("NA")
-    			.unit("uL/min/million hepatocytes")
-    			.model("NA")
-    			.reference("https://doi.org/10.1093/toxsci/kfz205")
-    			.percentile("NA")
-    			.species("Human")
-    			.dataSourceSpecies("Human")
-    			.build();
-    	
-    	ccdADME = factory.createProjection(CcdADME.class);
-    	ccdADME.setLabel("Intrinsic Hepatic Clearance");
-    	ccdADME.setDtxsid("DTXSID7020182");
-    	ccdADME.setDescription("Intrinsic hepatic clearance characterizes the volume of blood cleared by the metabolism of a million hepatocytes. This value can be scaled to predict in vivo clearance using the cellular density of, volume of, and blood flow to the liver.");
-    	ccdADME.setMeasured("19.9");
-    	ccdADME.setPredicted("NA");
-    	ccdADME.setUnit("uL/min/million hepatocytes");
-    	ccdADME.setModel("NA");
-    	ccdADME.setReference("https://doi.org/10.1093/toxsci/kfz205");
-    	ccdADME.setPercentile("NA");
-    	ccdADME.setSpecies("Human");
-    	ccdADME.setDataSourceSpecies("Human");
-    	
+
+        adme = Adme.builder()
+                .id(104519)
+                .dtxsid("DTXSID7020182")
+                .description("Clint")
+                .measured("19.9")
+                .predicted("NA")
+                .unit("uL/min/million hepatocytes")
+                .model("NA")
+                .reference("https://doi.org/10.1093/toxsci/kfz205")
+                .percentile("NA")
+                .species("Human")
+                .dataSourceSpecies("Human")
+                .build();
+
+        ccdADME = factory.createProjection(CcdADME.class);
+        ccdADME.setLabel("Intrinsic Hepatic Clearance");
+        ccdADME.setDtxsid("DTXSID7020182");
+        ccdADME.setDescription("Intrinsic hepatic clearance characterizes the volume of blood cleared by the metabolism of a million hepatocytes. This value can be scaled to predict in vivo clearance using the cellular density of, volume of, and blood flow to the liver.");
+        ccdADME.setMeasured("19.9");
+        ccdADME.setPredicted("NA");
+        ccdADME.setUnit("uL/min/million hepatocytes");
+        ccdADME.setModel("NA");
+        ccdADME.setReference("https://doi.org/10.1093/toxsci/kfz205");
+        ccdADME.setPercentile("NA");
+        ccdADME.setSpecies("Human");
+        ccdADME.setDataSourceSpecies("Human");
+
     }
 
     @Test
@@ -79,12 +83,12 @@ class AdmeResourceTest {
         when(admeRepository.findByDtxsid("DTXSID7020182", Adme.class)).thenReturn(ivive);
 
         mockMvc.perform(get("/hazard/adme-ivive/search/by-dtxsid/{dtxsid}", "DTXSID7020182"))
-				.andDo(MockMvcResultHandlers.print())
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].dtxsid").value(adme.getDtxsid()));
-    
+
     }
-    
+
     @Test
     void testGetAdmeIviveByDtxsidCCD() throws Exception {
         final List<CcdADME> ivive = Collections.singletonList(ccdADME);
@@ -92,9 +96,9 @@ class AdmeResourceTest {
         when(admeRepository.findByDtxsidWithLabelColumn("DTXSID7020182")).thenReturn(ivive);
 
         mockMvc.perform(get("/hazard/adme-ivive/search/by-dtxsid/{dtxsid}", "DTXSID7020182")
-        		.param("projection", "ccd-adme-data"))
-				.andDo(MockMvcResultHandlers.print())
+                .param("projection", "ccd-adme-data"))
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].dtxsid").value(ccdADME.getDtxsid()));    
+                .andExpect(jsonPath("$[0].dtxsid").value(ccdADME.getDtxsid()));
     }
 }

@@ -34,8 +34,8 @@ public class AdmeResource implements AdmeApi{
         	default -> repository.findByDtxsid(dtxsid, Adme.class);
         };
 
-        if (result instanceof List<?>) {
-            return (List<?>) result;
+        if (result instanceof List<?> list) {
+            return list;
         } else if (result != null) {
             return List.of(result); 
         } else {

@@ -1,10 +1,13 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
@@ -18,8 +21,9 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 
 @ActiveProfiles("test")
+@MockitoSettings(strictness = Strictness.WARN)
 @WebMvcTest(HazardResource.class)
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 class HazardResourceTest {
 
     @Autowired
@@ -47,7 +51,8 @@ class HazardResourceTest {
      */
     @Test
     void testHealthEndpoint_WhenDataAccessExceptionThrown_ShouldReturn404NotFound() throws Exception {
-        doThrow(new DataAccessException("Database connection failed") {})
+        doThrow(new DataAccessException("Database connection failed") {
+        })
                 .when(jdbcTemplate).execute("SELECT 1 ");
 
         mockMvc.perform(get("/hazard/health"))
@@ -61,7 +66,8 @@ class HazardResourceTest {
      */
     @Test
     void testHealthEndpoint_WhenDatabaseConnectionFails_ShouldReturn404NotFound() throws Exception {
-        doThrow(new DataAccessException("Unable to connect to database host") {})
+        doThrow(new DataAccessException("Unable to connect to database host") {
+        })
                 .when(jdbcTemplate).execute("SELECT 1 ");
 
         mockMvc.perform(get("/hazard/health"))

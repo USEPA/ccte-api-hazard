@@ -5,10 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 //This will test REST end-points in the HawcResource.java using WebMvcTest and MockitoBean
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,32 +26,33 @@ import gov.epa.ccte.api.hazard.repository.HawcRepository;
 import java.util.*;
 
 @ActiveProfiles("test")
+@MockitoSettings(strictness = Strictness.WARN)
 @WebMvcTest(HawcResource.class)
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 class HawcResourceTest {
-	
+
     @Autowired
     private MockMvc mockMvc;
-    
+
     @MockitoBean
     private HawcRepository hawcRepository;
-    
+
     private Hawc hawc;
 
     @BeforeEach
     void setUp() {
-    	
-    	hawc = Hawc.builder()
-    			.id(100500243)
-    			.name("ORD IRIS Assessment Inorganic Arsenic")
-    			.dtxsid("DTXSID4023886")
-    			.year(2025)
-    			.ccdUrl("https://comptox.epa.gov/dashboard/dsstoxdb/results?search=DTXSID4023886")
-    			.hawcUrl("https://hawc.epa.gov/assessment/100500243/")
-    			.build();
-    	
+
+        hawc = Hawc.builder()
+                .id(100500243)
+                .name("ORD IRIS Assessment Inorganic Arsenic")
+                .dtxsid("DTXSID4023886")
+                .year(2025)
+                .ccdUrl("https://comptox.epa.gov/dashboard/dsstoxdb/results?search=DTXSID4023886")
+                .hawcUrl("https://hawc.epa.gov/assessment/100500243/")
+                .build();
+
     }
-    
+
     @Test
     void testGetHawcByDtxsid() throws Exception {
         final List<Object> data = Collections.singletonList(hawc);
@@ -56,9 +60,9 @@ class HawcResourceTest {
         when(hawcRepository.findByDtxsid("DTXSID4023886")).thenReturn(data);
 
         mockMvc.perform(get("/hazard/hawc/search/by-dtxsid/{dtxsid}", "DTXSID4023886"))
-				.andDo(MockMvcResultHandlers.print())
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].dtxsid").value(hawc.getDtxsid()));
-    
+
     }
 }

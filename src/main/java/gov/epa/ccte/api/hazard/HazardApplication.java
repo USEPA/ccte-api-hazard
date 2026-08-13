@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
+import org.springframework.boot.webmvc.autoconfigure.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
@@ -79,11 +79,18 @@ public class HazardApplication {
 			log.warn("The host name could not be determined, using `localhost` as fallback");
 		}
 		log.info(
-				"\n----------------------------------------------------------\n\t" +
-						"Application '{}' is running! Access URLs:\n\t" +
-						"Local: \t\t{}://localhost:{}{}\n\t" +
-						"External: \t{}://{}:{}{}\n\t" +
-						"Profile(s): \t{}\n----------------------------------------------------------",
+				"""
+                
+                ----------------------------------------------------------
+                \t\
+                Application '{}' is running! Access URLs:
+                \t\
+                Local: \t\t{}://localhost:{}{}
+                \t\
+                External: \t{}://{}:{}{}
+                \t\
+                Profile(s): \t{}
+                ----------------------------------------------------------""",
 				env.getProperty("spring.application.name"),
 				protocol,
 				serverPort,
@@ -100,8 +107,12 @@ public class HazardApplication {
 			configServerStatus = "Not found or not setup for this application";
 		}
 		log.info(
-				"\n----------------------------------------------------------\n\t" +
-						"Config Server: \t{}\n----------------------------------------------------------",
+				"""
+                
+                ----------------------------------------------------------
+                \t\
+                Config Server: \t{}
+                ----------------------------------------------------------""",
 				configServerStatus
 		);
 	}

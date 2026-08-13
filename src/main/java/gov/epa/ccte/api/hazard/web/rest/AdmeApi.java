@@ -4,9 +4,8 @@ import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import gov.epa.ccte.api.hazard.domain.Adme;
@@ -40,7 +39,7 @@ public interface AdmeApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = { Adme.class, CcdADME.class}))),
     })
-    @RequestMapping(value = "hazard/adme-ivive/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "hazard/adme-ivive/search/by-dtxsid/{dtxsid}", produces = MediaType.APPLICATION_JSON_VALUE)
     List<?> admeDataByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") 
     						@PathVariable("dtxsid") String dtxsid,
     						@Parameter(description = "Specifies if projection is used. Option: ccd-adme-data. " +

@@ -71,8 +71,8 @@ public class GenetoxResource implements GenetoxApi {
         	default -> detailRepository.findByDtxsidOrderBySourceAsc(dtxsid, CcdGenetoxDetail.class);
         };
         
-        if (result instanceof List<?>) {
-            return (List<?>) result;
+        if (result instanceof List<?> list) {
+            return list;
         } else if (result != null) {
             return List.of(result); 
         } else {

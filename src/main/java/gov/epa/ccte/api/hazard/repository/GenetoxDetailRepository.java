@@ -4,7 +4,7 @@ import gov.epa.ccte.api.hazard.domain.GenetoxDetail;
 import gov.epa.ccte.api.hazard.projection.CcdGenetoxDetail;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ public interface GenetoxDetailRepository extends JpaRepository<GenetoxDetail, In
 
     <T> List<T> findByDtxsidInOrderByDtxsidAsc(String[] dtxsids, Class<T> type);
 
-    @Query(value = """
+    @NativeQuery("""
 			SELECT
     			genetox.dtxsid,
 			    genetox.source, 
@@ -34,6 +34,6 @@ public interface GenetoxDetailRepository extends JpaRepository<GenetoxDetail, In
 			    toxval.mv_genetox_details genetox     					  					
 			WHERE
 			    genetox.dtxsid = :dtxsid
-		""", nativeQuery = true)
+		""")
     List<CcdGenetoxDetail> findByDtxsidWithConcatenatedColumn(@Param("dtxsid")String dtxsid);
 }
