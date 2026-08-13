@@ -1,6 +1,7 @@
 package gov.epa.ccte.api.hazard.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.cfg.MapperBuilder;
 import gov.epa.ccte.api.hazard.config.converter.StringToImageFormatConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.support.ConfigurableConversionService;
@@ -49,8 +50,8 @@ public class SpringDataRestCustomization implements RepositoryRestConfigurer {
     }
 
     @Override
-    public void configureJacksonObjectMapper(ObjectMapper objectMapper) {
-        RepositoryRestConfigurer.super.configureJacksonObjectMapper(objectMapper);
+    public void configureJacksonObjectMapper(MapperBuilder<? extends ObjectMapper, ? extends MapperBuilder<?, ?>> objectMapperBuilder) {
+        RepositoryRestConfigurer.super.configureJacksonObjectMapper(objectMapperBuilder);
     }
 
     @Override

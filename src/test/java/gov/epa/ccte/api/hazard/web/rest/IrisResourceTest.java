@@ -5,10 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 //This will test REST end-points in the IrisResource.java using WebMvcTest and MockitoBean
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -24,38 +27,39 @@ import java.time.LocalDate;
 import java.util.*;
 
 @ActiveProfiles("test")
+@MockitoSettings(strictness = Strictness.WARN)
 @WebMvcTest(IrisResource.class)
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 class IrisResourceTest {
-	
+
     @Autowired
     private MockMvc mockMvc;
-    
+
     @MockitoBean
     private IrisRepository irisRepository;
-    
+
     private Iris iris;
 
     @BeforeEach
     void setUp() {
-    	
-    	iris = Iris.builder()
-    			.dtxsid("DTXSID7020182")
-    			.chemicalName("Bisphenol A")
-    			.casrn("80-05-7")
-    			.lastSignificantRevision(LocalDate.of(1988,9,26))
-    			.literatureScreeningReview("Yes")
-    			.criticalEffectsSystems(null)
-    			.rfdChronic(null)
-    			.rfdSubchronic(null)
-    			.rfcChronic(null)
-    			.rfcSubchronic(null)
-    			.tumorSite(null)
-    			.irisUrl("https://iris.epa.gov/ChemicalLanding/&substance_nmbr=356")
-    			.build();
-    	
+
+        iris = Iris.builder()
+                .dtxsid("DTXSID7020182")
+                .chemicalName("Bisphenol A")
+                .casrn("80-05-7")
+                .lastSignificantRevision(LocalDate.of(1988, 9, 26))
+                .literatureScreeningReview("Yes")
+                .criticalEffectsSystems(null)
+                .rfdChronic(null)
+                .rfdSubchronic(null)
+                .rfcChronic(null)
+                .rfcSubchronic(null)
+                .tumorSite(null)
+                .irisUrl("https://iris.epa.gov/ChemicalLanding/&substance_nmbr=356")
+                .build();
+
     }
-    
+
     @Test
     void testGetIrisDataByDtxsid() throws Exception {
         final List<Object> data = Collections.singletonList(iris);
@@ -63,9 +67,9 @@ class IrisResourceTest {
         when(irisRepository.findByDtxsid("DTXSID7020182")).thenReturn(data);
 
         mockMvc.perform(get("/hazard/iris/search/by-dtxsid/{dtxsid}", "DTXSID7020182"))
-				.andDo(MockMvcResultHandlers.print())
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].dtxsid").value(iris.getDtxsid()));
-    
+
     }
 }

@@ -5,10 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 //This will test REST end-points in the ToxRefSummaryResource.java using WebMvcTest and MockitoBean
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -24,46 +27,47 @@ import java.time.LocalDate;
 import java.util.*;
 
 @ActiveProfiles("test")
+@MockitoSettings(strictness = Strictness.WARN)
 @WebMvcTest(ToxRefSummaryResource.class)
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 class ToxRefSummaryResourceTest {
 
     @Autowired
     private MockMvc mockMvc;
-    
+
     @MockitoBean
     private ToxRefSummaryRepository toxRefSummaryRepository;
-    
+
     private ToxRefSummary toxRefSummary;
-    
+
     @BeforeEach
     void setUp() {
-    	toxRefSummary = ToxRefSummary.builder()
-    			.id(1482L)
-    			.studyId(2108)
-    			.dtxsid("DTXSID9020112")
-    			.casrn("1912-24-9")
-    			.name("Atrazine")
-    			.studySource("opp_der")
-    			.studySourceId("41392401")
-    			.citation("Thompson, S.; Batastini, G.; Arthur, A. (1990) 13/52-Week Oral To- xicity Study in Dogs: Lab Project Number: 872151.  Unpublished study prepared by Ciba-Geigy Corp.  784 p.")
-    			.studyYear(1990)
-    			.studyType("CHR")
-    			.studyTypeGuideline("Chronic toxicity")
-    			.species("dog")
-    			.strainGroup("beagle")
-    			.strain("beagle")
-    			.adminRoute("Oral")
-    			.adminMethod("Feed")
-    			.doseStart(0)
-    			.doseStartUnit("week")
-    			.doseEnd(52)
-    			.doseEndUnit("week")
-    			.exportDate(LocalDate.of(2025,01,17))
-    			.version("v2_1")
-    			.build();
+        toxRefSummary = ToxRefSummary.builder()
+                .id(1482L)
+                .studyId(2108)
+                .dtxsid("DTXSID9020112")
+                .casrn("1912-24-9")
+                .name("Atrazine")
+                .studySource("opp_der")
+                .studySourceId("41392401")
+                .citation("Thompson, S.; Batastini, G.; Arthur, A. (1990) 13/52-Week Oral To- xicity Study in Dogs: Lab Project Number: 872151.  Unpublished study prepared by Ciba-Geigy Corp.  784 p.")
+                .studyYear(1990)
+                .studyType("CHR")
+                .studyTypeGuideline("Chronic toxicity")
+                .species("dog")
+                .strainGroup("beagle")
+                .strain("beagle")
+                .adminRoute("Oral")
+                .adminMethod("Feed")
+                .doseStart(0)
+                .doseStartUnit("week")
+                .doseEnd(52)
+                .doseEndUnit("week")
+                .exportDate(LocalDate.of(2025, 01, 17))
+                .version("v2_1")
+                .build();
     }
-    
+
 
     @Test
     void testGetToxRefSummaryByStudyId() throws Exception {
@@ -72,11 +76,11 @@ class ToxRefSummaryResourceTest {
         when(toxRefSummaryRepository.findAllByStudyId(2108, ToxRefSummary.class)).thenReturn(summary);
 
         mockMvc.perform(get("/hazard/toxref/summary/search/by-study-id/{studyId}", "2108"))
-				.andDo(MockMvcResultHandlers.print())
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].studyId").value(toxRefSummary.getStudyId()));
-	}
-    
+    }
+
     @Test
     void testGetToxRefSummaryByDtxsid() throws Exception {
         final List<ToxRefSummary> summary = Collections.singletonList(toxRefSummary);
@@ -84,11 +88,11 @@ class ToxRefSummaryResourceTest {
         when(toxRefSummaryRepository.findAllByDtxsid("DTXSID9020112", ToxRefSummary.class)).thenReturn(summary);
 
         mockMvc.perform(get("/hazard/toxref/summary/search/by-dtxsid/{dtxsid}", "DTXSID9020112"))
-				.andDo(MockMvcResultHandlers.print())
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].dtxsid").value(toxRefSummary.getDtxsid()));
-	}
-    
+    }
+
     @Test
     void testGetToxRefSummaryByStudyType() throws Exception {
         final List<ToxRefSummary> summary = Collections.singletonList(toxRefSummary);
@@ -96,10 +100,10 @@ class ToxRefSummaryResourceTest {
         when(toxRefSummaryRepository.findAllByStudyType("CHR", ToxRefSummary.class)).thenReturn(summary);
 
         mockMvc.perform(get("/hazard/toxref/summary/search/by-study-type/{studyType}", "CHR"))
-				.andDo(MockMvcResultHandlers.print())
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].studyType").value(toxRefSummary.getStudyType()));
-	}
-    
+    }
+
 }
     
