@@ -129,7 +129,7 @@ public class GenetoxDetail {
     private String panelReport;
     
     @Size(max = 45)
-    @Column(name = " protocol_era")
+    @Column(name = "protocol_era")
     private String protocolEra;
     
     @Size(max = 1024)
