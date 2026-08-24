@@ -46,7 +46,7 @@ public interface ToxValDbApi {
      * @param dtxsid and category the matching dtxsid and category of the hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get all data by dtxsid and category")
+    @Operation(summary = "Get all data by DTXSID and category")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = { ToxValDb.class})))
@@ -82,7 +82,7 @@ public interface ToxValDbApi {
      * @param dtxsid the matching dtxsid of the toxval supercategories to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get all toxval supercategories by dtxsid")
+    @Operation(summary = "Get all toxval supercategories by DTXSID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = { ToxValDb.class})))
