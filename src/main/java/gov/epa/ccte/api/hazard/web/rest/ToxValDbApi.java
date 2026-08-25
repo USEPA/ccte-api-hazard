@@ -82,7 +82,7 @@ public interface ToxValDbApi {
      * @param dtxsid the matching dtxsid of the toxval supercategories to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get all toxval supercategories by DTXSID")
+    @Operation(summary = "Get all ToxVal supercategories by DTXSID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = { ToxValDb.class})))
