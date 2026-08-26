@@ -13,7 +13,7 @@ public final class DefaultProfileUtil {
 
     public static void addDefaultProfile(SpringApplication app) {
         Map<String, Object> defProperties = new HashMap();
-        defProperties.put("spring.profiles.default", "dev");
+        defProperties.put("spring.profiles.default", "local");
         app.setDefaultProperties(defProperties);
     }
 }
