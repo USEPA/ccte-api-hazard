@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>gov.epa.ccte.api</groupId>
 	<artifactId>hazard</artifactId>
-	<version>2.1.0</version>
+	<version>1.2.0</version>
 	<name>hazard</name>
 	<description>project for hazard data</description>
 	<properties>
@@ -154,6 +154,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>
