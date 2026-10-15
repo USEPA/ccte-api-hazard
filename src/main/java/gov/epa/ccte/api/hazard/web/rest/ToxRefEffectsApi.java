@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxRefEffects}s.
  */
-@Tag(name = "ToxRefDb Effects Resource",
+@Tag(name = "ToxRefDB Effects Resource",
         description = "Collection of endpoints for guideline and guideline-like in vivo toxicity data curated in the US EPA's Toxicity Reference Database (ToxRefDB). This resource provides an export of all extracted dose-treatment group-effect information.")
 @SecurityRequirement(name = "api_key")
 public interface ToxRefEffectsApi {
